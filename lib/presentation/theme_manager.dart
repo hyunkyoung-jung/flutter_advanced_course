@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_course/presentation/color_manager.dart';
+import 'package:flutter_advanced_course/presentation/font_manager.dart';
+import 'package:flutter_advanced_course/presentation/styles_manager.dart';
 import 'package:flutter_advanced_course/presentation/values_manager.dart';
 
 ThemeData getApplicationTheme() {
@@ -9,6 +11,8 @@ ThemeData getApplicationTheme() {
       primaryColorLight: ColorManager.primaryOpacity70,
       primaryColorDark: ColorManager.darkPrimary,
       disabledColor: ColorManager.grey1,
+      // ripple color
+      splashColor: ColorManager.primaryOpacity70,
       // will be used incase of disabled button for example
       colorScheme:
           ColorScheme.fromSwatch().copyWith(secondary: ColorManager.grey),
@@ -16,9 +20,15 @@ ThemeData getApplicationTheme() {
       cardTheme: CardTheme(
           color: ColorManager.white,
           shadowColor: ColorManager.grey,
-          elevation: AppSize.s4)
+          elevation: AppSize.s4),
       // App bar theme
-
+      appBarTheme: AppBarTheme(
+          centerTitle: true,
+          color: ColorManager.primary,
+          elevation: AppSize.s4,
+          shadowColor: ColorManager.primaryOpacity70,
+          titleTextStyle: getRegularStyle(
+              color: ColorManager.white, fontSize: FontSize.s16))
       // Button theme
 
       // Text theme
