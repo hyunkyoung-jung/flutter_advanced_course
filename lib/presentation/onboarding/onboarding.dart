@@ -89,7 +89,9 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                 child: SvgPicture.asset(ImageAssets.leftArrowIc),
               ),
               onTap: () {
-                // go to next slide
+                _pageController.animateToPage(_getPreviousIndex(),
+                    duration: Duration(milliseconds: DurationConstant.d300),
+                    curve: Curves.bounceInOut);
               },
             )),
         // circles indicator
@@ -113,22 +115,41 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               ),
               onTap: () {
                 // go to next slide
+                _pageController.animateToPage(_getNextIndex(),
+                    duration: Duration(milliseconds: DurationConstant.d300),
+                    curve: Curves.bounceInOut);
               },
             )),
       ],
     );
   }
 
+  int _getPreviousIndex() {
+    int previousIndex = _currentIndex--; // -1
+    if (previousIndex == -1) {
+      _currentIndex = _list.length - 1;
+      // infinite loop to go to the length of slider list
+    }
+    return _currentIndex;
+  }
+
+  int _getNextIndex() {
+    int nextIndex = _currentIndex--; // -1
+    if (nextIndex >= _list.length) {
+      _currentIndex = 0;
+      // infinite loop to go to the first item inside the slider
+    }
+    return _currentIndex;
+  }
+
   Widget _getProperCircle(int index) {
-    if(index == _currentIndex) {
+    if (index == _currentIndex) {
       return SvgPicture.asset(ImageAssets.hollowCircleIc); // selected slider
     } else {
       return SvgPicture.asset(ImageAssets.solidCircleIc); // unselected slider
     }
   }
 }
-
-
 
 class OnBoardingPage extends StatelessWidget {
   SliderObject _sliderObject;
